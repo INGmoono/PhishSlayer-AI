@@ -1,0 +1,194 @@
+---
+import "../styles/global.css";
+---
+
+<div>
+	<header class="m-5 grid grid-cols-6 place-items-center gap-3">
+		<h1 class="font-medium">PhishSlayer</h1>
+		<a href="#" class="hover:underline">Service</a>
+		<a href="#" class="hover:underline">Functionality</a>
+		<a href="#" class="hover:underline">Usage</a>
+		<a href="#" class="hover:underline">Sign in</a>
+		<a href="#" class="hover:underline">Sign up</a>
+	</header>
+	
+	<main class="m-10 flex flex-col place-items-center justify-center">
+		<div class="flex w-full max-w-7xl gap-10">
+			<!-- Sección izquierda -->
+			<div class="w-2/3">
+				<h2 class="m-5 mt-20 mb-5 text-6xl font-bold xl:text-7xl">Set your link</h2>
+				<form class="flex flex-col place-items-start">
+					<input required type="url" name="link" placeholder="https://malicious-link.com" id="link" class="w-3/4 max-w-lg rounded-xl border-2 border-blue-100 p-2" />
+
+					<button type="submit" class="m-5 rounded-xl bg-blue-500 p-2 font-bold text-white">Detect maliciousness</button>
+				</form>
+				<div id="result" class="mt-5 text-xl font-semibold"></div>
+				<button id="toggleDetails" class="hidden mt-4 rounded-lg bg-blue-300 px-4 py-2 font-bold text-white hover:bg-blue-400">Ver información de este link</button>
+				<div id="details" class="hidden mt-4 text-sm text-gray-800 bg-blue-50 p-4 rounded-lg w-full max-w-xl"></div>
+			</div>
+	
+			<!-- history -->
+			<div id="history" class="mt-10 w-full max-w-xl text-left bg-gray-50 rounded-xl shadow-md p-6 border border-gray-200">
+				<h3 class="mb-4 text-2xl font-bold text-gray-800">Historial de URLs escaneadas</h3>
+				<ul id="historyList" class="space-y-3"></ul>
+			</div>
+
+		</div>
+	</main>
+	
+	
+	<section class="m-10 mt-25 mb-25 xl:mx-[30rem]">
+		<h2 class="text-4xl font-bold xl:text-5xl">What is PhishSlayer</h2>
+		<p class="text-lg font-medium xl:text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro sequi eos sit error sunt aspernatur distinctio deleniti molestias at alias?</p>
+	</section>
+
+	<article class="m-10 grid grid-cols-4 gap-4">
+		<div class="col-span-3 h-48 rounded-xl bg-gradient-to-tr from-blue-100 xl:h-96"></div>
+		<div class="col-span-1 h-48 rounded-xl bg-gradient-to-tr from-blue-200 xl:h-96"></div>
+		<div class="col-span-2 h-48 rounded-xl bg-gradient-to-tr from-blue-300 xl:h-96"></div>
+		<div class="col-span-2 h-48 rounded-xl bg-gradient-to-tr from-blue-400 xl:h-96"></div>
+		<div class="col-span-1 h-48 rounded-xl bg-gradient-to-tr from-blue-500 xl:h-80"></div>
+		<div class="col-span-3 h-48 rounded-xl bg-gradient-to-tr from-blue-600 xl:h-80"></div>
+	</article>
+
+	<article class="m-10 my-25 h-auto rounded-xl bg-blue-50 p-10 shadow-xs xl:mx-96">
+		<h2 class="text-4xl font-semibold xl:text-5xl">How it works</h2>
+		<p class="text-lg font-normal xl:text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro sequi eos sit error sunt aspernatur distinctio deleniti molestias at alias?</p>
+	</article>
+
+	<article class="m-10 mt-25 flex flex-col justify-center">
+		<h2 class="my-5 text-center text-4xl font-semibold xl:text-5xl">Why PhishSlayer</h2>
+		<div class="grid grid-cols-2 gap-4 xl:mx-72">
+			<div class="col-span-1 h-52 rounded-xl bg-gradient-to-tr to-blue-800 xl:h-96"></div>
+			<div class="col-span-1 h-52 rounded-xl bg-gradient-to-tr from-blue-900 xl:h-96"></div>
+			<div class="col-span-1 h-52 rounded-xl bg-gradient-to-tr from-blue-700 xl:h-96"></div>
+			<div class="col-span-1 h-52 rounded-xl bg-gradient-to-tr from-blue-600 xl:h-96"></div>
+		</div>
+	</article>
+
+	<footer class="mt-50 mb-7">
+		<section class="my-25 flex flex-col place-items-center">
+			<h2 class="m-5 mx-40 text-6xl font-semibold xl:mx-40">Enjoy your favorite sites without being tracked or logged in</h2>
+			<p class="mx-40 text-xl font-normal">Stay ahead of malicious links and find security in AI detection effortlessly with Phishslayer today!</p>
+			<button type="submit" class="m-5 mx-48 w-40 rounded-xl bg-blue-500 p-2 font-bold text-white">Sign up</button>
+		</section>
+	
+		<section class="mx-25 mt-25 grid grid-cols-5 place-items-center gap-10">
+			<div class="">
+			<img src="https://static.vecteezy.com/system/resources/previews/019/637/202/non_2x/blue-tape-circle-logo-icon-free-png" alt="description" width="100" height="100" />
+			</div>
+			<a href="https://github.com/oxtornado/PhishSlayer-AI" class="hover:underline">Info.</a>
+			<a href="https://github.com/midudev/hackaton-clerk-2025/issues/8" class="hover:underline">Creators</a>
+			<a href="#" class="">Used API</a>
+			<a href="#" class="">Social</a>
+		</section>
+	</footer>
+	<!-- Integracion con FastAPI -->
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const form = document.querySelector('form');
+			const input = document.querySelector('#link');
+			const resultDiv = document.querySelector('#result');
+			const detailsDiv = document.querySelector('#details');
+			const toggleButton = document.querySelector('#toggleDetails');
+	
+			let lastStats: Record<string, number> | null = null;
+	
+			function loadHistory(): void {
+				const history: { url: string; malicious: boolean }[] = JSON.parse(localStorage.getItem("urlHistory") || "[]");
+				const historyList = document.getElementById("historyList") as HTMLUListElement | null;
+	
+				if (!historyList) return;
+	
+				historyList.innerHTML = "";
+	
+				history.forEach((item: { url: string; malicious: boolean }) => {
+					const li = document.createElement("li");
+					li.innerHTML = `
+						<div class="flex items-center justify-between p-3 rounded-lg shadow-sm border
+							${item.malicious ? 'bg-red-50 border-red-200 text-red-700' : 'bg-blue-50 border-blue-200 text-blue-700'}">
+							<span class="truncate max-w-[80%]">${item.url}</span>
+							<span class="text-xl">${item.malicious ? '⚠️' : '☑️'}</span>
+						</div>
+					`;
+					historyList?.appendChild(li);
+				});
+
+			}
+	
+			function saveToHistory(url: string, malicious: boolean): void {
+				const history: { url: string; malicious: boolean }[] = JSON.parse(localStorage.getItem("urlHistory") || "[]");
+				history.unshift({ url, malicious });
+				if (history.length > 10) history.pop();
+				localStorage.setItem("urlHistory", JSON.stringify(history));
+				loadHistory();
+			}
+	
+			if (
+				form instanceof HTMLFormElement &&
+				input instanceof HTMLInputElement &&
+				resultDiv instanceof HTMLDivElement &&
+				detailsDiv instanceof HTMLDivElement &&
+				toggleButton instanceof HTMLButtonElement
+			) {
+				form.addEventListener('submit', async (e) => {
+					e.preventDefault();
+					const url = input.value;
+	
+					resultDiv.textContent = "Analizando link...";
+					resultDiv.className = "mt-5 text-center text-xl font-semibold text-blue-500";
+					detailsDiv.classList.add('hidden');
+					toggleButton.classList.add('hidden');
+	
+					try {
+						const res = await fetch('http://127.0.0.1:8000/scan-url', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({ url })
+						});
+	
+						const data: { malicious: boolean; stats: Record<string, number>; detail?: string } = await res.json();
+	
+						if (res.ok) {
+							lastStats = data.stats;
+	
+							if (data.malicious) {
+								resultDiv.textContent = `⚠️ ¡El link es malicioso!`;
+								resultDiv.className = "mt-5 text-left text-xl font-semibold text-red-600";
+							} else {
+								resultDiv.textContent = `☑️ El link es seguro.`;
+								resultDiv.className = "mt-5 text-left text-xl font-semibold text-blue-600";
+							}
+	
+							toggleButton.classList.remove('hidden');
+							saveToHistory(url, data.malicious);
+						} else {
+							resultDiv.textContent = `❌ Error: ${data.detail}`;
+							resultDiv.className = "mt-5 text-center text-xl font-semibold text-red-500";
+						}
+					} catch (err) {
+						resultDiv.textContent = "❌ Error al conectar con el servidor.";
+						resultDiv.className = "mt-5 text-center text-xl font-semibold text-red-500";
+						console.error(err);
+					}
+				});
+	
+				toggleButton.addEventListener('click', () => {
+					if (lastStats) {
+						const statsHtml = Object.entries(lastStats)
+							.map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
+							.join('');
+	
+						detailsDiv.innerHTML = statsHtml;
+						detailsDiv.classList.toggle('hidden');
+					}
+				});
+				loadHistory();
+			}
+		});
+	</script>
+	
+	
+</div>  
