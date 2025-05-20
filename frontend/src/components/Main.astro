@@ -141,7 +141,7 @@ import "../styles/global.css";
 					toggleButton.classList.add('hidden');
 	
 					try {
-						const res = await fetch('http://127.0.0.1:8000/scan-url', {
+						const res = await fetch(`${import.meta.env.PUBLIC_API_BASE_URL}/scan-url`, {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json'
